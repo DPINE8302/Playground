@@ -47,6 +47,7 @@ The application is built entirely with client-side HTML, CSS, and JavaScript:
 2.  Open the `css_playground.html` file in any modern web browser (e.g., Chrome, Firefox, Edge, Safari).
 3.  Start typing your HTML and CSS, and see the magic happen in the live preview pane!
 4.  Click the "Fullscreen" button on the preview panel to see your animation take over the screen.
+5.  Here's the page [Terminal.](https://dpine8302.github.io/Playground/)
 
 
 ## ✨ Bonus Ideas (Potential Future Enhancements)
@@ -60,7 +61,7 @@ The application is built entirely with client-side HTML, CSS, and JavaScript:
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME/issues) (if you've created one).
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/YOUR_USERNAME/Terminal./issues) (if you've created one).
 
 1.  Fork the Project
 2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
