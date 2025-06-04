@@ -70,12 +70,12 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the `LICENSE.md` file for details (or choose another license if you prefer).
+This project is licensed under the MIT License - see the `LICENSE.md` file for details.
 
 ---
 <p align="center">
-  Created with ❤️ by Kirati Rattanaporn (win)
+  Created with ❤️ by Kirati Rattanaporn (Win)
 </p>
 <p align="center">
-  © <script>document.write(new Date().getFullYear())</script> Wiqnnc_. All Rights Reserved.
+  ©2025 Wiqnnc_. All Rights Reserved.
 </p>
