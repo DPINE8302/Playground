@@ -391,6 +391,11 @@
             <button id="download-html">Download HTML</button>
             <button id="download-css">Download CSS</button>
         </div>
+        <div class="control-group">
+            <button id="export-presets">Export Presets</button>
+            <button id="import-presets">Import Presets</button>
+            <input type="file" id="import-presets-file" accept="application/json" style="display:none" />
+        </div>
         <div class="spacer"></div>
         <button id="toggle-theme" title="Toggle Light/Dark Theme">🌓 Theme</button>
     </div>
@@ -414,6 +419,9 @@
         const copyCssButton = document.getElementById('copy-css');
         const downloadHtmlButton = document.getElementById('download-html');
         const downloadCssButton = document.getElementById('download-css');
+        const exportPresetsButton = document.getElementById('export-presets');
+        const importPresetsButton = document.getElementById('import-presets');
+        const importPresetsFileInput = document.getElementById('import-presets-file');
         const toggleThemeButton = document.getElementById('toggle-theme');
         const toggleFullscreenButton = document.getElementById('toggle-fullscreen-preview');
         const currentYearSpan = document.getElementById('current-year');
@@ -634,6 +642,57 @@ ${htmlEditor.value}
 
         downloadCssButton.addEventListener('click', () => {
             downloadFile('styles.css', cssEditor.value, 'text/css');
+        });
+
+        exportPresetsButton.addEventListener('click', () => {
+            const presets = getPresets();
+            if (presets.length === 0) {
+                alert('No presets to export.');
+                return;
+            }
+            const blob = new Blob([JSON.stringify(presets, null, 2)], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'presets.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+
+        importPresetsButton.addEventListener('click', () => {
+            importPresetsFileInput.click();
+        });
+
+        importPresetsFileInput.addEventListener('change', () => {
+            const file = importPresetsFileInput.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (!Array.isArray(imported)) throw new Error('Invalid format');
+                    let presets = getPresets();
+                    let changed = false;
+                    imported.forEach(p => {
+                        if (p && p.id && p.name && typeof p.html === 'string' && typeof p.css === 'string' && !presets.some(ex => ex.id === p.id)) {
+                            presets.push(p);
+                            changed = true;
+                        }
+                    });
+                    if (changed) {
+                        savePresets(presets);
+                        alert('Presets imported!');
+                    } else {
+                        alert('No new presets were imported.');
+                    }
+                } catch (err) {
+                    alert('Failed to import presets: ' + err.message);
+                }
+                importPresetsFileInput.value = '';
+            };
+            reader.readAsText(file);
         });
 
         // --- Theme Toggle ---
