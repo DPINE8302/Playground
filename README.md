@@ -14,6 +14,7 @@ A live, in-browser editor that lets users write HTML/CSS code and see their CSS 
     *   **Save:** Store your HTML and CSS combinations as named presets in `localStorage`.
     *   **Load:** Quickly load saved presets from a dropdown menu.
     *   **Delete:** Remove presets you no longer need.
+    *   **Import/Export:** Share your creations by exporting presets as JSON and importing them later.
 *   **📤 Code Export:**
     *   **Copy:** One-click copy HTML or CSS to your clipboard.
     *   **Download:** Download your animation as a self-contained `.html` file or just the `.css` styles.
