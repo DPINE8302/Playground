@@ -602,14 +602,15 @@
 
         function downloadFile(filename, content, mimeType) {
             const element = document.createElement('a');
-            const blob = new Blob([content], {type: mimeType});
-            element.href = URL.createObjectURL(blob);
+            const blob = new Blob([content], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            element.href = url;
             element.setAttribute('download', filename);
             element.style.display = 'none';
             document.body.appendChild(element);
             element.click();
             document.body.removeChild(element);
-            URL.revokeObjectURL(element.href); 
+            URL.revokeObjectURL(url);
         }
 
         downloadHtmlButton.addEventListener('click', () => {
