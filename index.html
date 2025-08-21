@@ -64,15 +64,34 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             transition: background-color 0.3s, color 0.3s;
-            font-size: 14px; 
+            font-size: 14px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
+        .device-banner {
+            text-align: center;
+            padding: 4px;
+            font-size: 0.9em;
+            background-color: var(--header-bg-color);
+        }
+
+        @media (max-width: 600px) {
+            .device-banner { background-color: #E0F7FA; }
+        }
+
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .device-banner { background-color: #FFF3E0; }
+        }
+
+        @media (min-width: 1025px) {
+            .device-banner { background-color: #E8F5E9; }
+        }
+
         .editor-container {
             display: flex;
-            flex-basis: 45%; 
-            min-height: 220px; 
+            flex-basis: 45%;
+            min-height: 220px;
             gap: 15px; 
             padding: 15px 15px 7px 15px;
         }
@@ -346,6 +365,8 @@
     </style>
 </head>
 <body>
+
+    <div id="device-banner" class="device-banner"></div>
 
     <div class="editor-container">
         <div class="editor-pane">
@@ -839,10 +860,22 @@ ${htmlEditor.value}
 
 
         // --- Initial Load ---
+        function detectDeviceType() {
+            const ua = navigator.userAgent;
+            if (/iPad|Tablet/i.test(ua)) return 'iPad';
+            if (/Mobi/i.test(ua)) return 'Mobile';
+            return 'Desktop';
+        }
+
         function initializeApp() {
             // Set current year in footer
             if(currentYearSpan) {
                 currentYearSpan.textContent = new Date().getFullYear();
+            }
+
+            const banner = document.getElementById('device-banner');
+            if (banner) {
+                banner.textContent = `You are using ${detectDeviceType()}`;
             }
 
             // Load and apply theme
